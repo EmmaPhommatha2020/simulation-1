@@ -1,28 +1,32 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
+
 class Form extends Component {
   constructor() {
     super()
     this.state = {
-      products: [],
-      name:'',
-      price:'',
-      imageurl:''
+      // products: [],
+      // name: '',
+      // price: '',
+      // imageurl: '',
+      // productid: ''
     }
   }
 
-  componenDidMount(){
-    axios.get('http://localhost:4000/api/products').then(res =>{
-      console.log("get products--->", res)
-    })
-  }
+
+  // componentDidMount() {
+  //   axios.put('/api/product/:id').then(res => {
+  //     this.setState({
+  //       favFlowers: res.data
+  //     })
+  //   });
+  // }
 
 
   render() {
     return (
       <div>
-        
       </div>
     )
   }

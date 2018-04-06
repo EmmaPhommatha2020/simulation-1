@@ -2,17 +2,21 @@ import React from 'react';
 import { Link } from 'react-router-dom'
 
 
-function Header(){
+function Header() {
   return (
     <nav className='nav'>
-    <div className="shelfie">Shelfie</div>
-    <div className='link-wrap'>
+      <div className="logo">
+        <img src="https://github.com/DevMountain/simulation-1/blob/master/assets/shelfie_icon.png?raw=true" alt="logo" />
+      </div>
 
-      {<Link to="/" className='links'>Dashboard</Link>}
-      {<Link to="/product" className='links'>Product</Link>}
+      <div className="shelfie">SHELFIE</div>
+      <div className='link-wrap'>
 
-    </div>
-  </nav>
+        {<Link to="/" className='links'>Dashboard</Link>}
+        {<Link to="/product" className='links'>Product</Link>}
+
+      </div>
+    </nav>
   )
 }
 
