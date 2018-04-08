@@ -6,22 +6,22 @@ class Form extends Component {
   constructor() {
     super()
     this.state = {
-      // products: [],
-      // name: '',
-      // price: '',
-      // imageurl: '',
-      // productid: ''
+      product: [],
+      name: '',
+      price: '',
+      imageurl: '',
+      productid: ''
     }
   }
 
 
-  // componentDidMount() {
-  //   axios.put('/api/product/:id').then(res => {
-  //     this.setState({
-  //       favFlowers: res.data
-  //     })
-  //   });
-  // }
+  componentDidMount() {
+    axios.put('/api/product/:id').then(res => {
+      this.setState({
+        product: res.data
+      })
+    });
+  }
 
 
   render() {
