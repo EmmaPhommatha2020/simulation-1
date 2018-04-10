@@ -1,10 +1,10 @@
 import React from 'react';
-
+import { Link } from 'react-router-dom';
 
 function Product(props) {
-  const { name, price, imageurl, productid } = props;
+  const { name, price, imageurl, deleteProduct, product, productid} = props
+  {console.log(imageurl, 'props')}
   return (
-
     <div className="redbox">
       <img className="img" src={imageurl} alt='pic' />
       <div className="content">
@@ -12,10 +12,11 @@ function Product(props) {
           <p>{name}</p>
           <p>${price}</p>
         </div>
-
         <div className='buttonsContainer'>
-          <button>Delete</button>
-          <button>Edit</button>
+          {<button onClick={() => deleteProduct(productid)}>Delete</button>}
+          <Link to={'/edit/' + productid}>
+          <button >Edit</button>
+          </Link>
         </div>
       </div>
     </div>

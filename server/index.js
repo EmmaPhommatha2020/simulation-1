@@ -4,17 +4,17 @@ const bodyParser = require('body-parser');
 const massive = require('massive');
 // require('dotenv').config();
 const config = require('./config')
-const controller = require('./controller.js')
+const ctr = require('./controller.js')
 
 const app = new express();
 app.use(bodyParser.json());
 // app.use(cors());
 
-app.post('/api/product', controller.create);
-app.get('/api/products', controller.getAll);
-app.get('/api/product/:id', controller.getOne);
-app.put('/api/product/:id', controller.update);
-app.delete('/api/product/:id', controller.delete);
+app.post('/api/product', ctr.create);
+app.get('/api/products', ctr.getAll);
+app.get('/api/product/:id', ctr.getOne);
+app.put('/api/product/:id', ctr.update);
+app.delete('/api/product/:id', ctr.delete);
 
 
 const port = 4000;
