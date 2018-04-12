@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'; 
 
 
 function Header() {
@@ -13,7 +13,7 @@ function Header() {
       <div className='link-wrap'>
 
         <Link to="/" className='links'>Dashboard</Link>
-        <Link to="/product" className='links'>Add Inventory</Link>
+        <Link to="/inventory" className='links'>Add Inventory</Link>
       </div>
     </nav>
   )

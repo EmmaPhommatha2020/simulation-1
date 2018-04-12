@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import './style.css'
+import './style.css';
+import { Link } from 'react-router-dom';
 
 
 class Form extends Component {
   constructor() {
     super()
     this.state = {
-      product: [],
       name: '',
       price: '',
       imageurl: '',
@@ -16,78 +16,77 @@ class Form extends Component {
   }
 
   componentDidMount() {
-    axios.get('/api/products').then(res => {
+    let id = this.props.match.params.id
+    axios.get(`/api/product/${id}`).then(res => {
+      const data = res.data[0];
+
       this.setState({
-        products: res.data,
+        name: data.name,
+        price: data.price,
+        imageurl: data.imageurl,
       })
     });
   }
 
-  addProduct(name, price, imageurl) {
-    axios.post('/api/product', { name: name, price: price, imageurl: imageurl }).then(res => {
-      this.setState({
-        products: res.data,
-        name: '',
-        price: '',
-        imageurl: ''
-      })
-    })
+
+  addProduct = (name, price, imageurl) => {
+    axios.post('/api/product', { name: this.state.name, price: this.state.price, imageurl: this.state.imageurl })
   }
 
-  updateProduct(name, price, imageurl, productid) {
-    axios.put(`/api/product/${productid}`, { name: name, price: price, imageurl: imageurl }).then(res => {
-      // console.log("put res--->", res.data)
-      this.setState({
-        products: res.data
-      })
-    })
-  }
-
-
-  handleChangeName = (e) => {
-    const { value } = e.target
-    this.setState({
-      name: value
-    })
-  }
-
-  handleChangePrice = (e) => {
-    const { value } = e.target
-    this.setState({
-      price: value
-    })
+  updateProduct() {
+    let id = this.props.match.params.id
+    let info = { name: this.state.name, price: this.state.price, imageurl: this.state.imageurl }
+    axios.put(`/api/product/${id}`, info);
   }
 
   handleChangeImgURL = (e) => {
-    const { value } = e.target
     this.setState({
-      imageurl: value
+      [e.target.name]: e.target.value
     })
   }
 
 
   render() {
     const { products, name, price, imageurl } = this.state;
-    
     return (
       <div className="form">
         <div className="form_img">
-
+          <img className="img_in_from" src={imageurl} alt='Image_URL' />
         </div>
         <div>
           <h4>Image URL: </h4>
-          <input onChange={(e) => this.handleChangeImgURL(e)} type="text" name="imgURL" value = {this.state.imageurl}/>
+          <input onChange={(e) => this.handleChangeImgURL(e)} type="text" name="imageurl" value={this.state.imageurl} />
           <h4>Product Name: </h4>
-          <input onChange={(e) => this.handleChangeName(e)} type="text" name="productName" value = {this.state.name}/>
+          <input onChange={(e) => this.handleChangeImgURL(e)} type="text" name="name" value={this.state.name} />
           <h4>Price: </h4>
-          <input onChange={(e) => this.handleChangePrice(e)} type="text" name="price" value = {this.state.price}/>
+          <input onChange={(e) => this.handleChangeImgURL(e)} type="text" name="price" value={this.state.price} />
         </div>
         <div className="add_inventory">
-          <button className="add" type="submit">cancel</button>
-          <button className="add" type="submit" onClick={() => this.addProduct(name, price, imageurl)}>Add to Inventory</button>
+          <button className="add" type="submit" onClick={() => this.setState({ name: '', imageurl: '', price: '' })}>cancel</button>
+
+          <Link to="/">
+            {
+              this.props.match.path === '/edit/:id'
+                ?
+                <button className="add" type="submit" onClick={() => this.updateProduct(name, price, imageurl)}> Save changes</button>
+                :
+                <button className="add" type="submit" onClick={() => this.addProduct(name, price, imageurl)}>Add to Inventory</button>
+            }
+          </Link>
+
         </div>
       </div>
     )
   }
 }
 export default Form;
+
+// {
+//   this.state.name
+//     ?
+//     <button className="add" type="submit" onClick={() => this.updateProduct(name, price, imageurl)}> Save changes</button>
+//     :
+//     <button className="add" type="submit" onClick={() => this.addProduct(name, price, imageurl)}>Add to Inventory</button>
+
+
+// }

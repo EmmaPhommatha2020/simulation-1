@@ -1,14 +1,11 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-// const cors = require('cors');
 const massive = require('massive');
-// require('dotenv').config();
 const config = require('./config')
 const ctr = require('./controller.js')
 
 const app = new express();
 app.use(bodyParser.json());
-// app.use(cors());
 
 app.post('/api/product', ctr.create);
 app.get('/api/products', ctr.getAll);

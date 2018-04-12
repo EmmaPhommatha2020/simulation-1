@@ -2,16 +2,17 @@ module.exports = {
   create: (req, res, next) => {
     const connection = req.app.get('db');
     const { name, price, imageurl } = req.body;
+    console.log(  name, price, imageurl )
     connection.createProduct([name, price, imageurl])
-      .then((result) => res.status(200).send(result))
+      .then((product) => res.status(200).send(product))
       .catch((err) => res.status(500).send(err));
   },
   
   getOne: (req, res, next) => {
     const connection = req.app.get('db');
-    const { params } = req;
+    const { id } = req.params;
 
-    connection.readProduct([params.id])
+    connection.readProduct([id])
       .then(product => res.status(200).send(product))
       .catch(() => res.status(500).send());
   },
@@ -27,8 +28,8 @@ module.exports = {
   update: (req, res, next) => {
     const connection = req.app.get('db');
     const { name, price , imageurl} = req.body
-
-    connection.updateProduct([name, price , imageurl, req.params.id])
+    const { id } = req.params;
+    connection.updateProduct([name, price , imageurl, id])
       .then((result) => res.status(200).send(result))
       .catch(() => res.status(500).send());
   },

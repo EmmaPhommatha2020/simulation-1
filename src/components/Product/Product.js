@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 
 function Product(props) {
   const { name, price, imageurl, deleteProduct, product, productid} = props
-  {console.log(imageurl, 'props')}
   return (
     <div className="redbox">
       <img className="img" src={imageurl} alt='pic' />
@@ -14,7 +13,7 @@ function Product(props) {
         </div>
         <div className='buttonsContainer'>
           {<button onClick={() => deleteProduct(productid)}>Delete</button>}
-          <Link to={'/edit/' + productid}>
+          <Link to={`/edit/${productid}`}>
           <button >Edit</button>
           </Link>
         </div>
