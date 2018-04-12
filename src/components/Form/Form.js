@@ -10,8 +10,7 @@ class Form extends Component {
     this.state = {
       name: '',
       price: '',
-      imageurl: '',
-      productid: ''
+      imageurl: ''
     }
   }
 
@@ -47,7 +46,7 @@ class Form extends Component {
 
 
   render() {
-    const { products, name, price, imageurl } = this.state;
+    const { name, price, imageurl } = this.state;
     return (
       <div className="form">
         <div className="form_img">
@@ -62,13 +61,13 @@ class Form extends Component {
           <input onChange={(e) => this.handleChangeImgURL(e)} type="text" name="price" value={this.state.price} />
         </div>
         <div className="add_inventory">
-          <button className="add" type="submit" onClick={() => this.setState({ name: '', imageurl: '', price: '' })}>cancel</button>
+          <button className="add" type="submit" onClick={() => this.setState({ name: '', imageurl: '', price: '' })}>Cancel</button>
 
           <Link to="/">
             {
               this.props.match.path === '/edit/:id'
                 ?
-                <button className="add" type="submit" onClick={() => this.updateProduct(name, price, imageurl)}> Save changes</button>
+                <button className="add" type="submit" onClick={() => this.updateProduct(name, price, imageurl)}> Save Changes</button>
                 :
                 <button className="add" type="submit" onClick={() => this.addProduct(name, price, imageurl)}>Add to Inventory</button>
             }
